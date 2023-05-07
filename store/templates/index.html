@@ -19,7 +19,7 @@
           <a class="navbar-brand" href="#">
             <img src="/static/logo2.png" alt="..." height="60">
           </a>
-          <a class="navbar-brand" href="#"><b>eshop |</b></a>
+          <a class="navbar-brand" href="/"><b>Eshop |</b></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -34,37 +34,42 @@
             </ul>
             <ul class="navbar-nav">
               {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link " href="/cart/">Cart
+                    <span class="badge bg-primary">
+                    {% if request.session.cart.keys|length == 0 %}
+                      <!-- empty -->
+                    {% else %}
+                      {{request.session.cart.keys|length}} 
+                    {% endif %}
+                    </span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="/your-order/">Order</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="/logout/">Logout</a>
+                </li>
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Welcome -{{request.user}}
+                    Hi - {{request.user}}
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/change-password/{{user.id}}">Change Password</a></li>
-                    <li><a class="dropdown-item inactive" href="#">Reset Password</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="/update/{{user.id}}">Update</a></li>
-                </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link " href="/cart/">Cart  <span class="badge bg-info">
-                      {{request.session.cart.keys|length}}</span></a>
-                    
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link " href="/your-order/">Order</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link " href="/logout/">logout</a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="/change-password/{{user.id}}">Change Password</a></li>
+                          <li><a class="dropdown-item inactive" href="#">Reset Password</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/update/{{user.id}}">Update</a></li>
+                  </ul>
                   </li>
                   {% else %}
                   <li class="nav-item">
                     <a class="nav-link " href="/cart/">Cart</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link " href="/login/">login</a>
+                    <a class="nav-link " href="/login/">Login</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link " href="/signup/">signup</a>
+                    <a class="nav-link " href="/signup/">Signup</a>
                   </li>
                   {% endif %}
                   
@@ -72,12 +77,47 @@
           </div>
         </div>
       </nav>
+{% block 'image' %}
+      <!-- Home - image -->
+      <div class="bg-image">
+          <style>
+            body, html {
+              height: 100%;
+              margin: 0;
+            }
+            
+            .bg-image {
+              /* The image used */
+              background-image: url("/static/2.jpg");
+            
+              /* Full height */
+              height: 90%; 
+            
+              /* Center and scale the image nicely */
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: cover;
+            }
+            </style>
+{% endblock %}
+{% block 'content' %}
+      
+     <div class="text-center">
+            <div class="row justify-content-end">
+              <div class="col-sm-4 mt-5">
+                  <form action="" method ='post' class="p-3 rounded text-dark me-5">
+                      <h4 class="text-dark text-center ">Welcome - {{request.user}} To Eshop</h4>
+                      <div class="d-flex align-items-center flex-column">
+                        <h2 class="mb-0 me-2">Start Shopping</h2>
+                        <a class="mt-2 btn btn-outline-dark mt-3 col-sm-6" href="/AllProduct/">Click Here</a>                
+                    </div>
+                  </form>
+              </div>
+            </div> 
+         </div>
 
-    {% block 'content' %}
-    <div class="text-center">
-      Welcome -{{request.user}}
-    </div>
-    {% endblock %}
+      {% endblock %}
+      </div>
     <style>
       .navbar-brand{
       font-size: 270%;

@@ -3,20 +3,26 @@
 Add Patient Details
 {% endblock %}
 {% block 'content' %}
-    
-<div class="container">
-    <div >
-      <div class="row justify-content-around">
-        
-        <form action="" method ='post' class="border border-dark col-sm-4 mt-5 p-3 bg-white rounded">
-          <h3 class='text-center'>Update User Details</h3>
+    <!-- update -->
+    <div class="row justify-content-around">
+      <div class="col-sm-3">
+          <form action="" method ='post' class="bg-white p-3 rounded-3 text-dark mt-5">
+              <h3 class="text-dark text-center">- - - Update Details - - -</h3>
           {% csrf_token %}
-
-          {{form.as_p}}
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>    
-            </div>
-    </div>
+              <B>{% for fm in form%}
+                  {{fm.label_tag}}<br>
+                  {{fm}}<br><br>
+                  <small class="text-danger">{{fm.errors}}</small>
+              {% endfor %}</B>
+              <br>
+              <center>
+                  <b>
+                    <div class="d-flex align-items-center flex-column">
+                      <input type="submit" class="btn btn-outline-dark col-sm-8 mb-2" value='SUMBIT'>
+                  </div>              
+                  </b>
+              </center>
+          </form>
+      </div>
 </div>
-
 {% endblock %}

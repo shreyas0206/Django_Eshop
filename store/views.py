@@ -118,7 +118,7 @@ class UpdateUserView(UpdateView):
     model = User
     fields = ['username','email']
     template_name = 'Update.html'
-    success_url = '/login'
+    success_url = '/'
 
 class CheckOut(View,User):
     
